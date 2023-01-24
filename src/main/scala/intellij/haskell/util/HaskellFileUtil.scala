@@ -33,9 +33,9 @@ import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.{LocalFileSystem, VirtualFile, VirtualFileManager}
 import com.intellij.psi.impl.PsiManagerEx
 import com.intellij.psi.{PsiDocumentManager, PsiFile, PsiManager}
-import intellij.haskell.HaskellFileType
-import intellij.haskell.external.component.{NoInfo, NoInfoAvailable}
-import intellij.haskell.psi.HaskellPsiUtil
+import intellij.haskell.lang.haskell.HaskellFileType
+import intellij.haskell.lang.haskell.psi.HaskellPsiUtil
+import intellij.haskell.external.component._
 
 object HaskellFileUtil {
 

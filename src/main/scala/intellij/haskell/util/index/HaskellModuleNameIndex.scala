@@ -17,17 +17,17 @@
 package intellij.haskell.util.index
 
 import java.util.Collections
-
 import com.github.blemale.scaffeine.{LoadingCache, Scaffeine}
 import com.intellij.openapi.project.{IndexNotReadyException, Project}
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiFile
 import com.intellij.util.indexing._
 import com.intellij.util.io.{EnumeratorStringDescriptor, KeyDescriptor}
-import intellij.haskell.HaskellFileType
-import intellij.haskell.external.component._
-import intellij.haskell.psi.HaskellPsiUtil
+import intellij.haskell.external.component.{NoInfo, ReadActionTimeout}
+import intellij.haskell.lang.haskell.HaskellFileType
 import intellij.haskell.util.{ApplicationUtil, HaskellFileUtil, HaskellProjectUtil}
+import intellij.haskell.external.component._
+import intellij.haskell.lang.haskell.psi.HaskellPsiUtil
 
 import scala.jdk.CollectionConverters._
 

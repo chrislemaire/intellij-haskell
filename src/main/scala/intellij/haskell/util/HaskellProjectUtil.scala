@@ -27,9 +27,6 @@ import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.{PsiElement, PsiFile}
 import com.intellij.util.PathUtilRt
 import intellij.haskell.GlobalInfo
-import intellij.haskell.external.component.HaskellComponentsManager
-import intellij.haskell.module.HaskellModuleType
-import intellij.haskell.sdk.HaskellSdkType
 import org.jetbrains.jps.model.java.JavaModuleSourceRootTypes
 
 import scala.jdk.CollectionConverters._
@@ -38,14 +35,8 @@ object HaskellProjectUtil {
 
   final val Prelude = "Prelude"
 
-  def setNoDiagnosticsShowCaretFlag(project: Project): Boolean = {
-    HaskellComponentsManager.getGhcVersion(project).exists(ghcVersion =>
-      ghcVersion >= GhcVersion(8, 2, 1)
-    )
-  }
-
   def isValidHaskellProject(project: Project, notifyNoSdk: Boolean): Boolean = {
-    isHaskellProject(project) && HaskellSdkType.getStackPath(project, notifyNoSdk).isDefined
+    isHaskellProject(project) // && HaskellSdkType.getStackPath(project, notifyNoSdk).isDefined
   }
 
   def isHaskellProject(project: Project): Boolean = {
@@ -69,11 +60,6 @@ object HaskellProjectUtil {
     HaskellFileUtil.findVirtualFile(psiFile).forall(vf => isSourceFile(project, vf))
   }
 
-  def isLibraryFile(psiFile: PsiFile): Boolean = {
-    val projectLibDirectory = getProjectLibrarySourcesDirectory(psiFile.getProject)
-    HaskellFileUtil.findVirtualFile(psiFile).exists(vf => FileUtil.isAncestor(projectLibDirectory.getAbsolutePath, vf.getPath, true))
-  }
-
   def getProjectLibrarySourcesDirectory(project: Project): File = {
     new File(GlobalInfo.getLibrarySourcesPath, project.getName)
   }
@@ -87,29 +73,12 @@ object HaskellProjectUtil {
     }
   }
 
-  def findCabalFiles(project: Project): Iterable[File] = {
-    val modules = findProjectHaskellModules(project)
-    val dirs = modules.map(getModuleDir)
-    dirs.flatMap(findCabalFile)
-  }
-
   def findCabalFile(directory: File): Option[File] = {
     directory.listFiles.find(_.getName.endsWith(".cabal"))
   }
 
   def findStackFile(directory: File): Option[File] = {
     directory.listFiles.find(_.getName == "stack.yaml")
-  }
-
-  def findPackageFiles(project: Project): Iterable[File] = {
-    val modules = findProjectHaskellModules(project)
-    val dirs = modules.map(getModuleDir)
-    dirs.flatMap(findCabalFile)
-    dirs.flatMap(findPackageFile)
-  }
-
-  def findStackFile(project: Project): Option[File] = {
-    findStackFile(new File(project.getBasePath))
   }
 
   def findPackageFile(directory: File): Option[File] = {
@@ -120,42 +89,15 @@ object HaskellProjectUtil {
     GlobalSearchScope.allScope(project)
   }
 
-  def getSearchScope(project: Project, includeNonProjectItems: Boolean): GlobalSearchScope = {
-    if (includeNonProjectItems) getProjectSearchScope(project) else GlobalSearchScope.projectScope(project)
-  }
-
   import ScalaUtil._
-
-  def getProjectRootManager(project: Project): Option[ProjectRootManager] = {
-    project.isDisposed.optionNot(Option(ProjectRootManager.getInstance(project))).flatten
-  }
-
-  def getModuleManager(project: Project): Option[ModuleManager] = {
-    project.isDisposed.optionNot(Option(ModuleManager.getInstance(project))).flatten
-  }
-
-  def getModuleRootManager(project: Project, module: Module): Option[ModuleRootManager] = {
-    project.isDisposed.optionNot(Option(ModuleRootManager.getInstance(module))).flatten
-  }
 
   def findModule(psiElement: PsiElement): Option[Module] = {
     Option(ModuleUtilCore.findModuleForPsiElement(psiElement))
   }
 
-  def findModuleForFile(psiFile: PsiFile): Option[Module] = {
-    Option(ModuleUtilCore.findModuleForFile(psiFile))
-  }
-
-  def findModuleForVirtualFile(project: Project, virtualFile: VirtualFile): Option[Module] = {
-    Option(ModuleUtilCore.findModuleForFile(virtualFile, project))
-  }
-
   def findProjectHaskellModules(project: Project): Iterable[Module] = {
-    ModuleManager.getInstance(project).getModules.filter(_.getModuleTypeName == HaskellModuleType.Id)
-  }
-
-  def findProjectPackageNames(project: Project): Seq[String] = {
-    HaskellComponentsManager.findProjectModulePackageNames(project).map(_._2)
+    Iterable()
+//    ModuleManager.getInstance(project).getModules.filter(_.getModuleTypeName == HaskellModuleType.Id)
   }
 }
 

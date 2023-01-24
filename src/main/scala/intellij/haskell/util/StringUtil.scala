@@ -18,7 +18,7 @@ package intellij.haskell.util
 
 import com.intellij.openapi.project.Project
 import com.intellij.xml.util.XmlStringUtil
-import intellij.haskell.HaskellNotificationGroup
+import intellij.haskell.lang.haskell.HaskellNotificationGroup
 
 import scala.collection.mutable.ListBuffer
 

@@ -3,7 +3,7 @@ package intellij.haskell.util
 import java.util.concurrent.{Future, TimeUnit, TimeoutException}
 
 import com.intellij.openapi.project.Project
-import intellij.haskell.HaskellNotificationGroup
+import intellij.haskell.lang.haskell.HaskellNotificationGroup
 
 object FutureUtil {
 

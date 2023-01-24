@@ -34,7 +34,7 @@ import com.intellij.ui.LightweightHint
 import com.intellij.ui.awt.RelativePoint
 import com.intellij.util.ui.UIUtil.FontSize
 import com.intellij.util.ui.{PositionTracker, UIUtil}
-import intellij.haskell.HaskellFile
+import intellij.haskell.lang.haskell.HaskellFile
 import javax.swing.Icon
 import javax.swing.event.HyperlinkListener
 

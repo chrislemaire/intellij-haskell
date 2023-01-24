@@ -23,8 +23,8 @@ import com.intellij.openapi.progress.ProgressIndicatorProvider
 import com.intellij.openapi.progress.util.ProgressIndicatorBase
 import com.intellij.openapi.project.Project
 import com.intellij.util.concurrency.AppExecutorUtil
-import intellij.haskell.HaskellNotificationGroup
-import intellij.haskell.external.component.{IndexNotReady, NoInfo, ReadActionTimeout}
+import intellij.haskell.lang.haskell.HaskellNotificationGroup
+import intellij.haskell.external.component._
 
 import scala.concurrent.TimeoutException
 

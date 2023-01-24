@@ -4,7 +4,6 @@ import com.intellij.application.options.PathMacrosImpl
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.SystemInfo
 import com.intellij.openapi.util.io.FileUtil
-import intellij.haskell.settings.HaskellSettingsState
 import intellij.haskell.util.HaskellFileUtil
 import io.github.soc.directories.ProjectDirectories
 
@@ -26,7 +25,7 @@ object GlobalInfo {
   }
 
   lazy val getIntelliJHaskellDirectory: File = {
-    val directory = new File(HaskellSettingsState.getCachePath)
+    val directory = new File("")
     if (directory.exists()) {
       HaskellFileUtil.removeGroupWritePermission(directory)
     } else {
@@ -45,27 +44,6 @@ object GlobalInfo {
 
   lazy val toolsBinPath: File = {
     new File(toolsStackRootPath, ToolsBinDirName)
-  }
-
-  def toolPath(tool: HTool): File = {
-    val name = if (SystemInfo.isWindows) tool.name + ".exe" else tool.name
-    new File(toolsBinPath, name)
-  }
-
-  lazy val defaultHlintPath: File = {
-    toolPath(HTool.Hlint)
-  }
-
-  lazy val defaultHooglePath: File = {
-    toolPath(HTool.Hoogle)
-  }
-
-  lazy val defaultStylishHaskellPath: File = {
-    toolPath(HTool.StylishHaskell)
-  }
-
-  lazy val defaultOrmoluPath: File = {
-    toolPath(HTool.Ormolu)
   }
 
   def getIntelliJProjectDirectory(project: Project): File = {

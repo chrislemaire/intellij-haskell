@@ -4,7 +4,7 @@ import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.project.Project
 import com.intellij.util.WaitFor
-import intellij.haskell.HaskellNotificationGroup
+import intellij.haskell.lang.haskell.HaskellNotificationGroup
 
 import scala.concurrent.duration._
 import scala.concurrent.{Await, Future, TimeoutException}

@@ -1,5 +1,5 @@
 lazy val commonSettings = Seq(
-  version := "1.0.0-beta88",
+  version := "1.0.1",
   scalaVersion := "2.13.8"
 )
 
@@ -10,24 +10,27 @@ val scaffeine = "com.github.blemale" %% "scaffeine" % "5.1.2"
 val directories = "io.github.soc" % "directories" % "12"
 val fastparse = "com.lihaoyi" %% "fastparse" % "2.3.3"
 
-(ThisBuild / intellijPluginName) := "IntelliJ-Haskell"
+(ThisBuild / intellijPluginName) := "HaskelliJ"
 
 lazy val intellijHaskell = (project in file(".")).
   enablePlugins(SbtIdeaPlugin).
   settings(commonSettings: _*).
   settings(
-    name := "IntelliJ Haskell",
+    name := "HaskelliJ",
+
     javacOptions in Global ++= Seq("-source", "1.8", "-target", "1.8"),
     scalacOptions in Global ++= Seq("-target:jvm-1.8", "-deprecation", "-feature", "-unchecked"),
+
     libraryDependencies += scalaTest,
     libraryDependencies += sprayJson,
     libraryDependencies += snakeYaml,
     libraryDependencies += scaffeine,
     libraryDependencies += directories,
     libraryDependencies += fastparse,
+
     (Compile / unmanagedSourceDirectories) += baseDirectory.value / "gen"
   )
 
-(ThisBuild / intellijBuild) := "212.4746.92"
+(ThisBuild / intellijBuild) := "222.4167.29"
 
 intellijPlugins += "com.intellij.java".toPlugin
