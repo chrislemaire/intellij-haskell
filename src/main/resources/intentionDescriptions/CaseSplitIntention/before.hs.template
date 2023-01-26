@@ -1,4 +1,0 @@
-data FooType = Foo | Bar Int
-
-foo :: FooType -> Smth
-foo x = undefined

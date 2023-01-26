@@ -1,3 +1,0 @@
-foo :: FooType -> Smth
-foo Foo = undefined
-foo (Bar n) = undefined

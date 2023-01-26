@@ -1,0 +1,12 @@
+Haskell file(0,13)
+  HS_FILE_HEADER(0,0)
+    <empty list>
+  HS_MODULE_BODY(0,13)
+    HS_TOP_DECLARATION(0,13)
+      HS_EXPRESSION(0,13)
+        PsiElement(HaskellTokenType.MODULE)('module')(0,6)
+        PsiWhiteSpace(' ')(6,7)
+        HS_Q_NAME(7,13)
+          HS_VAR_CON(7,13)
+            HS_CONID(7,13)
+              PsiElement(HaskellTokenType.CON_ID)('Simple')(7,13)
